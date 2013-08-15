@@ -1,5 +1,5 @@
 {
-  "name": "marionette-dust-example",
+  "name": "marionette-dust-sampler",
   "version": "0.0.1",
   "description": "Example showing how to use Backbone, Marionette and Dust.",
   "dependencies": {
