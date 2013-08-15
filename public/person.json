@@ -1,0 +1,13 @@
+[{
+	"firstname": "John",
+	"lastname": "Bar",
+	"email": "john.bar@example.com",
+	"description": "I'm awesome, just hire me."
+},
+{
+	"firstname": "Dave",
+	"lastname": "Smith",
+	"email": "dave.bar@example.com",
+	"description": "I'm brilliant, just hire me."
+}
+]

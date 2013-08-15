@@ -1,0 +1,1 @@
+(function(){dust.register("person",body_0);function body_0(chk,ctx){return chk.write("<td><h1>").reference(ctx.get("firstname"),ctx,"h").write(" ").reference(ctx.get("lastname"),ctx,"h").write("</h1></td><td>\t<p>").reference(ctx.get("email"),ctx,"h").write("</p></td>\t<td><p>").reference(ctx.get("description"),ctx,"h").write("</p></td>\t");}return body_0;})();

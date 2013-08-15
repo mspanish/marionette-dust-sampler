@@ -1,27 +1,41 @@
+<!DOCTYPE html>
 <html>
+
 <head>
-	<title>Test Resume</title>
-	<script type="text/javascript" src="jquery-min.js"></script>
-	<script type="text/javascript" src="underscore-min.js"></script>
-	<script type="text/javascript" src="backbone-min.js"></script>
-	<script type="text/javascript" src="backbone.marionette-min.js"></script>
+    <title>Sample App Dust and Backbone Marionette</title> 
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/screen.css">
+    <script type="text/javascript" src="libs/jquery.min.js"></script>
+    <script type="text/javascript" src="libs/lodash.js"></script>
+    <script type="text/javascript" src="libs/backbone.js"></script>
+    <script type="text/javascript" src="libs/backbone.marionette.js"></script>
+    <script type="text/javascript" src="libs/dust-full-2.0.2.js"></script>
+    <script type="text/javascript" src="libs/backbone.marionette.dust.js"></script>
+    <script type="text/javascript" src="templates.js"></script>       
+    <script type="text/javascript" src="libs/bootstrap.min.js"></script> 
+          
 </head>
+
 <body>
-	<script type="text/template" id="infoTpl">
-		<h1><%= firstname %> <%= lastname %></h1>
-		<p><strong>Email:</strong> <%= email %></p>
-		<p><%= description %></p>
-	</script>
-	<script type="text/template" id="jobsList">
-		<h1>Jobs</h1>
-		<ol></ol>
-	</script>
-	<script type="text/template" id="jobRow">
-		From <%= startdate %> to <%= enddate %>: <strong><%= position %> at <%= company %></strong>
-	</script>
+<section id="main">
+<ul id="mainTabs" class="nav nav-tabs">
+  <li class="active"><a href="#composite" data-toggle="tab">CompositeView</a></li>
+  <li><a href="#item" data-toggle="tab">ItemView</a></li>
+  <li><a href="#collection" data-toggle="tab">CollectionView</a></li>
+  <li><a href="#other" data-toggle="tab">Other</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane fade in active" id="composite"></div>
+  <div class="tab-pane fade" id="item"></div>
+  <div class="tab-pane fade" id="collection">...</div>
+  <div class="tab-pane fade" id="other">...</div>
+</div>
+
+</section>
 </body>
-	<div id="info"></div>
-	<div id="jobs"></div>
-	<script type="text/javascript" src="app-marionette.js"></script>
-	<!--<script type="text/javascript" src="app-backbone.js"></script>-->
+
+<script type="text/javascript" src="app-marionette.js"></script>
+<!--<script type="text/javascript" src="app-backbone.js"></script>-->
+
 </html>
