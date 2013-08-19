@@ -1,0 +1,125 @@
+/***
+* CSS3 FLIP CARDS
+* Markup for an element that a user can hover to reveal content on the back, like a card
+* Browser Support: Safari, Firefox, Chrome, IE8+, and Touch Devices; (IE9 and below will not have any flip effect but will just change on hover)
+***/
+.flip-card {
+  display: block;
+  position: relative;
+  z-index: 1000;
+  width: 200px;
+  height: 150px;
+}
+.flip-card .card-front,
+.flip-card .card-back {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: -webkit-transform 500ms;
+  -moz-transition: -moz-transform 500ms;
+  -o-transition: -o-transform 500ms;
+  transition: transform 500ms;
+  display: block;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+.flip-card .card-front {
+  -webkit-transform: perspective(300) rotateY(0);
+  -moz-transform: perspective(300) rotateY(0);
+  -ms-transform: perspective(300) rotateY(0);
+  -o-transform: perspective(300) rotateY(0);
+  transform: perspective(300) rotateY(0);
+  z-index: 900;
+}
+.flip-card .card-back {
+  -webkit-transform: rotateY(-180deg);
+  -moz-transform: rotateY(-180deg);
+  -ms-transform: rotateY(-180deg);
+  -o-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
+  z-index: 800;
+}
+.flip-card:hover .card-front {
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  -webkit-transform: perspective(300) rotateY(180deg);
+  -moz-transform: perspective(300) rotateY(180deg);
+  -ms-transform: perspective(300) rotateY(180deg);
+  -o-transform: perspective(300) rotateY(180deg);
+  transform: perspective(300) rotateY(180deg);
+}
+.flip-card:hover .card-back {
+  z-index: 950;
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
+  -o-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+  -webkit-transform: perspective(300) rotateY(0deg);
+  -moz-transform: perspective(300) rotateY(0deg);
+  -ms-transform: perspective(300) rotateY(0deg);
+  -o-transform: perspective(300) rotateY(0deg);
+  transform: perspective(300) rotateY(0deg);
+}
+
+/*** Just for show... ***/
+.flip-card {
+  text-shadow: 1px 1px 0 rgba(14, 85, 143, 0.8);
+  color: #fff;
+  cursor: pointer;
+  float: left;
+  font-weight: bold;
+  margin: 10px;
+  text-align: center;
+  text-transform: uppercase;
+/*  min-width: 100px;
+  max-width: 400px;*/
+}
+.flip-card .card-front,
+.flip-card .card-back {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 1px 2px rgba(14, 85, 143, 0.8);
+  -moz-box-shadow: 1px 1px 2px rgba(14, 85, 143, 0.8);
+  box-shadow: 1px 1px 2px rgba(14, 85, 143, 0.8);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #051e32;
+  padding: 40px 0;
+}
+.flip-card .card-front {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  *zoom: 1;
+}
+.flip-card .card-back {
+  -webkit-box-shadow: 0 0 20px rgba(19, 113, 189, 0.8) inset;
+  -moz-box-shadow: 0 0 20px rgba(19, 113, 189, 0.8) inset;
+  box-shadow: 0 0 20px rgba(19, 113, 189, 0.8) inset;
+
+  *zoom: 1;
+}
+
+body {
+  background-color: #e6f2f7;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#FFE6F2F7', endColorstr='#FFA0D8EF');
+  background-image: -webkit-gradient(radial, 50%, 0, 50%, 100, color-stop(0%, #e6f2f7), color-stop(100%, #a0d8ef));
+  background-image: -webkit-radial-gradient(center, circle cover, #e6f2f7 0%, #a0d8ef 100%);
+  background-image: -moz-radial-gradient(center, circle cover, #e6f2f7 0%, #a0d8ef 100%);
+  background-image: -o-radial-gradient(center, circle cover, #e6f2f7 0%, #a0d8ef 100%);
+  background-image: radial-gradient(center, circle cover, #e6f2f7 0%, #a0d8ef 100%);
+}
+

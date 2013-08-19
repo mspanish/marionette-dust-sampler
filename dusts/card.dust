@@ -1,0 +1,13 @@
+<div id="container" class="flip-card">
+<div id="f1_card" class="shadow">
+  
+<div class="card front card-front visible" data-index="{index}">
+<h2>{spanish}</h2>
+</div>
+
+<div class="card back card-back" data-index="{index}">
+<h2>{english}</h2>
+</div>
+
+</div>
+</div>

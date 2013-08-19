@@ -1,0 +1,25 @@
+{#sections}
+  {@if cond="{$idx} < {numberItems}"} <input type="radio" name="pcss3t" checked id="tab{$idx}" class="tab-content-{$idx}">
+    <label for="tab{$idx}"><i class="icon-bolt iconbig"></i>{name}View</label>
+ 
+   {:else}
+    <input type="radio" name="pcss3t" checked id="tab{$idx}" class="tab-content-last">
+    <label for="tab{$idx}"><i class="icon-bolt iconbig"></i>{name}View</label>
+ {/if}
+{/sections}
+
+
+<ul>
+{#sections}
+{@if cond="{$idx} < {numberItems}"}
+    <li class="tab-content tab-content-{$idx} typography">
+      <div id="{name}"></div>
+    </li>
+ {:else}
+    <li class="tab-content tab-content-last typography">
+          <div id="{name}"></div>
+    </li>
+</ul>
+
+ {/if}
+{/sections}

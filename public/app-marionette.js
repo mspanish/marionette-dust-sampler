@@ -1,6 +1,31 @@
 (function(Backbone, _, $){
+MyApp = new Backbone.Marionette.Application;
 
-var MainApp = Backbone.Model.extend({
+MainLayout = Backbone.Marionette.Layout.extend({
+  template: "main",
+ 
+  regions: {
+  	mainRegion: "#main",
+ //   navRegion: "#nav",
+    tabsRegion: "#tabs"
+  }
+});
+
+var Tabs = Backbone.Model.extend({
+	defaults: {
+		'sections':
+      [
+		{'name':'composite'},
+		{'name':'item'},
+		{'name':'collection'},
+		{'name':'other'}
+      ],
+        'numberItems': 4
+    }
+
+});	
+
+var SingleThing = Backbone.Model.extend({
 	defaults: {
 		'title'  : 'Our Awesome Dust.js Tester',
 		'content': 'This shows a simple Marionette.ItemView, rendered by a Dust.js template' 
@@ -16,15 +41,70 @@ var MPerson = Backbone.Model.extend({
 	}
 });
 
+var MCard = Backbone.Model.extend({
+	defaults: {
+		'english'  : 'hola',
+		'spanish'   : 'hello'
+	}
+});
+
 
 var MPeople = Backbone.Collection.extend({
 	model: MPerson
 });
 
+var MCards = Backbone.Collection.extend({
+	model: MCard
+});
 
-var MainView = Marionette.ItemView.extend({
+var NoItemsView = Backbone.Marionette.ItemView.extend({
+  template: "empty"
+});
+
+var TabsView = Backbone.Marionette.ItemView.extend({
+  template: 'tabs',
+  onShow: function(){
+    // called when the view has been shown
+    console.log('hey we showed our tabs, from TabsView');
+    addTabs()
+  },
+   tagName: "div", 
+  className: "pcss3t pcss3t-effect-fade pcss3t-theme-1 pcss3t-height-auto" 
+});
+
+var MyCardView = Backbone.Marionette.ItemView.extend({
+  template: "card",
+  tagName: "div",
+  className: "cardstack",
+  templateHelpers: function(){
+
+        var modelIndex = this.model.collection.indexOf(this.model);
+        return {
+            index: modelIndex
+        }
+
+	} 
+});
+
+var MyCardsView = Backbone.Marionette.CollectionView.extend({
+  itemView: MyCardView,
+  emptyView: NoItemsView,
+  tagName: "div",
+  className: "container col-lg-6",
+  modelEvents: {
+        "change": "render"
+	},
+	 onRender: function () {
+	  //	$("body").css('backgroundColor', 'yellow');
+      console.log('cards collectionview rendered');
+    }
+
+});
+
+
+var SingleView = Marionette.ItemView.extend({
 	// We declare the template to be used by the view
-	template: 'main',
+	template: 'single',
 //	tagName: 'div',
 //	className: 'table-striped',
 	// We bind the model event to re-render
@@ -32,9 +112,8 @@ var MainView = Marionette.ItemView.extend({
         "change": "render"
 	},
 	 onRender: function () {
-	  //	$("body").css('backgroundColor', 'yellow');
       console.log('itemview rendered');
-    $('#mainTabs a:first').tab('show');
+    //$('#mainTabs a:first').tab('show');
     }
 });
 
@@ -70,24 +149,66 @@ var VCollection = Marionette.CompositeView.extend({
 
 
 // First: we instantiate our models...
+var mTabs = new Tabs();
 var mPerson = new MPerson();
 var mPeople = new MPeople();
-var mView = new MainApp();
+var mView = new SingleThing();
+var mCards = new MCards();
 
 // Now, we combine our models with the views
-var mainView    = new MainView   ({ model: mView   });
+var tabsView    = new TabsView   ({ model: mTabs   });
+var singleView    = new SingleView   ({ model: mView   });
 // Then, we instanciate a new view with the model
 var vInfo     = new VInfo    ({ model: mPerson    });
 var myView = new VCollection ({ collection: mPeople  });
+var myCards = new MyCardsView ({ collection: mCards  });
+
+
 
 // Then, we grab additional model data
 mPeople.fetch({ url: 'person.json' });
+mCards.fetch({ url: 'card.json' });
 
-// Finally, we render views in our app
+// cFinally, we render views in our app
 
-    $('#composite').append(myView.render().$el);
-    $('#item').append(mainView.render().$el);
 
+myLayout = new MainLayout();
+
+MyApp.addRegions({
+    mainRegion: '#main',
+  tabsRegion: '#tabs'
+});
+
+MyApp.mainRegion.show(myLayout);
+
+MyApp.tabsRegion.show(tabsView);
+
+	$('#composite').append(myView.render().$el);
+	$('#item').append(singleView.render().$el);
+	$('#collection').append(myCards.render().$el);	
+ 
+  //   $('body').append(tabsView.render().$el);
+
+  //    $('#composite').append(myView.render().$el);
+
+function addTabs() {
+console.log('i am adding tab content now...')
+    //    $('#compositeView').append(myView.render().$el);
+    // $('#itemView').append(singleView.render().$el);
+    //  $('#collectionView').append(myCards.render().$el);	
+}
+/*
+MyApp.mainRegion.on("close", function(view){
+  // manipulate the `view` or do something extra
+  // with the region via `this`
+});
+*/
+
+//MyApp.tabsRegion.show(singleView)
+ 
+// somewhere else in the code
+//myLayout.myRegion.show(anotherView);
+//myLayout.anotherRegion.show(moreView);
 
 
 })(Backbone, _, $);

@@ -1,6 +1,7 @@
 #main {
-margin-left:100px;
+margin-left:50px;
 margin-top: 50px;	
+width: 92%;
 }
 
 table {
@@ -17,4 +18,75 @@ outline: 0;
 
 element:focus{
  outline: thin transparent;
+}
+
+.container {
+width: 90%;
+height: 400px;
+overflow: hidden;
+position: relative;
+line-height:100px;
+/*background-color:yellow;*/
+}
+
+.cardstack {
+float: left;
+position:relatve;
+height: 150px;
+width: 200px;
+/*background-color:pink;*/
+margin:20px;
+}
+
+/* the line-height:3 on our text field is how we get the text to 
+center vertically */
+
+h2{
+line-height: 3;
+}
+
+.card {
+text-align: center;
+border: 1px dotted #656565;
+position: absolute;
+width: 200px;
+height: 150px;
+border-radius: 20px;
+border-width: 7px;
+border-color: #ff000;
+line-height: 150px;
+
+}
+
+.front {
+background-color: lightblue;
+
+}
+
+.back {
+background-color: lightpink;
+
+}
+
+.hidden {
+visibility: hidden;	
+}
+
+.visible {
+visibility: visible;	
+}
+
+/* Add a tab container class, for a border around the entire tabset */
+.nav-tabs-container {
+  padding: 3px;
+  border: 1px solid @grayLight;
+  .border-radius(4px);
+}
+
+
+.iconbig {
+font-size: 150%;
+}
+.tabHeight {
+
 }
