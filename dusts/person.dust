@@ -1,9 +1,0 @@
-<td>
-	<h1>{firstname} {lastname}</h1>
-</td>
-<td>	
-	<p>{email}</p>
-</td>	
-<td>
-	<p>{description}</p>
-</td>	

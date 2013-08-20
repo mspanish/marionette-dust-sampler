@@ -9,6 +9,7 @@
   z-index: 1000;
   width: 200px;
   height: 150px;
+  color: white;
 }
 .flip-card .card-front,
 .flip-card .card-back {
@@ -83,6 +84,7 @@
 }
 .flip-card .card-front,
 .flip-card .card-back {
+  color: white;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
@@ -105,9 +107,9 @@
   *zoom: 1;
 }
 .flip-card .card-back {
-  -webkit-box-shadow: 0 0 20px rgba(19, 113, 189, 0.8) inset;
+/*  -webkit-box-shadow: 0 0 20px rgba(19, 113, 189, 0.8) inset;
   -moz-box-shadow: 0 0 20px rgba(19, 113, 189, 0.8) inset;
-  box-shadow: 0 0 20px rgba(19, 113, 189, 0.8) inset;
+  box-shadow: 0 0 20px rgba(19, 113, 189, 0.8) inset;*/
 
   *zoom: 1;
 }

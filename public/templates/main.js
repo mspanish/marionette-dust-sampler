@@ -1,1 +1,1 @@
-(function(){dust.register("main",body_0);function body_0(chk,ctx){return chk.write("<h1>Main Layout Container</h1><div id=\"nav\"></div><div id=\"tabs\"></div>");}return body_0;})();
+(function(){dust.register("main",body_0);function body_0(chk,ctx){return chk.write("<h1>").reference(ctx.get("title"),ctx,"h").write("</h1><div id=\"nav\"></div><div id=\"tabs\"></div>");}return body_0;})();

@@ -1,9 +1,13 @@
 (function(Backbone, _, $){
 MyApp = new Backbone.Marionette.Application;
 
+MyApp.addInitializer(function(options){
+
+    });
+
 MainLayout = Backbone.Marionette.Layout.extend({
   template: "main",
- 
+  
   regions: {
   	mainRegion: "#main",
  //   navRegion: "#nav",
@@ -11,11 +15,18 @@ MainLayout = Backbone.Marionette.Layout.extend({
   }
 });
 
+var MMain = Backbone.Model.extend({
+	defaults: {
+		'title': 'Main Dust.js Template'
+    }
+
+});	
+
 var Tabs = Backbone.Model.extend({
 	defaults: {
 		'sections':
       [
-		{'name':'composite'},
+		{'name':'table'},
 		{'name':'item'},
 		{'name':'collection'},
 		{'name':'other'}
@@ -27,19 +38,39 @@ var Tabs = Backbone.Model.extend({
 
 var SingleThing = Backbone.Model.extend({
 	defaults: {
-		'title'  : 'Our Awesome Dust.js Tester',
+		'title'  : 'Our Awesome Dust.js itemView Template',
 		'content': 'This shows a simple Marionette.ItemView, rendered by a Dust.js template' 
 	}
 });	
 
-var MPerson = Backbone.Model.extend({
-	defaults: {
-		'firstname'  : 'joe',
-		'lastname'   : 'miller',
-		'email'      : null,
-		'description': null
+var MTable = Backbone.Model.extend({
+	defaults: { 
+		'rows': 
+		[
+			{'name' : 'Name'},
+			{'name' : 'Email'},
+			{'name' : 'Description'}
+		],
+		'items':
+		[
+		{
+			"firstname": "John",
+			"lastname": "Bar",
+			"email": "john.bar@example.com",
+			"description": "I'm awesome, just hire me."
+		},
+		{
+			"firstname": "Dave",
+			"lastname": "Smith",
+			"email": "dave.bar@example.com",
+			"description": "I'm brilliant, just hire me."
+		}
+		]
 	}
-});
+
+})
+
+
 
 var MCard = Backbone.Model.extend({
 	defaults: {
@@ -48,14 +79,14 @@ var MCard = Backbone.Model.extend({
 	}
 });
 
-
-var MPeople = Backbone.Collection.extend({
-	model: MPerson
-});
-
 var MCards = Backbone.Collection.extend({
 	model: MCard
 });
+
+var TableView = Backbone.Marionette.ItemView.extend({
+  template: "tableheaders",
+});
+
 
 var NoItemsView = Backbone.Marionette.ItemView.extend({
   template: "empty"
@@ -66,10 +97,9 @@ var TabsView = Backbone.Marionette.ItemView.extend({
   onShow: function(){
     // called when the view has been shown
     console.log('hey we showed our tabs, from TabsView');
-    addTabs()
   },
    tagName: "div", 
-  className: "pcss3t pcss3t-effect-fade pcss3t-theme-1 pcss3t-height-auto" 
+  className: "pcss3t fadeMe pcss3t-theme-1 pcss3t-height-auto" 
 });
 
 var MyCardView = Backbone.Marionette.ItemView.extend({
@@ -128,75 +158,56 @@ var VInfo = Marionette.ItemView.extend({
 	}
 });
 
-var VCollection = Marionette.CompositeView.extend({
+var TableView = Marionette.ItemView.extend({
+
 	// we're using this type of view so that we can combine a 
 	// table with repeating rows of data. 
-	template: 'people',
-	tagName: 'table',
-	className: 'table-bordered table-striped',
-	itemView: VInfo,
+	template: 'table',																					
 	// We bind the model event to re-render
 	modelEvents: {
         "change": "render"
 	},
 	  onRender: function () {
-	  //	$("body").css('backgroundColor', 'yellow');
-      console.log('composite view rendered');
+      console.log('table view rendered');
     }
-
-
 });
 
 
 // First: we instantiate our models...
 var mTabs = new Tabs();
-var mPerson = new MPerson();
-var mPeople = new MPeople();
+var mTable = new MTable();
 var mView = new SingleThing();
 var mCards = new MCards();
+var mMain = new MMain();
 
 // Now, we combine our models with the views
 var tabsView    = new TabsView   ({ model: mTabs   });
+var tableView    = new TableView   ({ model: mTable });
 var singleView    = new SingleView   ({ model: mView   });
-// Then, we instanciate a new view with the model
-var vInfo     = new VInfo    ({ model: mPerson    });
-var myView = new VCollection ({ collection: mPeople  });
 var myCards = new MyCardsView ({ collection: mCards  });
 
-
-
 // Then, we grab additional model data
-mPeople.fetch({ url: 'person.json' });
+//mPeople.fetch({ url: 'person.json' });
 mCards.fetch({ url: 'card.json' });
 
 // cFinally, we render views in our app
 
-
-myLayout = new MainLayout();
+myLayout = new MainLayout({ model: mMain   });
 
 MyApp.addRegions({
     mainRegion: '#main',
-  tabsRegion: '#tabs'
+  	tabsRegion: '#tabs'
+
 });
 
 MyApp.mainRegion.show(myLayout);
 
 MyApp.tabsRegion.show(tabsView);
 
-	$('#composite').append(myView.render().$el);
+	$('#table').append(tableView.render().$el);
 	$('#item').append(singleView.render().$el);
 	$('#collection').append(myCards.render().$el);	
- 
-  //   $('body').append(tabsView.render().$el);
 
-  //    $('#composite').append(myView.render().$el);
-
-function addTabs() {
-console.log('i am adding tab content now...')
-    //    $('#compositeView').append(myView.render().$el);
-    // $('#itemView').append(singleView.render().$el);
-    //  $('#collectionView').append(myCards.render().$el);	
-}
 /*
 MyApp.mainRegion.on("close", function(view){
   // manipulate the `view` or do something extra

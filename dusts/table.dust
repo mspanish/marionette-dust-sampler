@@ -1,0 +1,13 @@
+<table class='table-bordered table-striped'>
+<thead>        
+	<tr>{#rows}
+	    	<th>{name}</th>
+    	{/rows}
+    </tr>
+</thead>
+
+<tbody >
+{>person /}	
+</tbody>
+
+</table>
