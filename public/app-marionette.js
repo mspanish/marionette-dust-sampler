@@ -44,6 +44,7 @@ var SingleThing = Backbone.Model.extend({
 });	
 
 var MTable = Backbone.Model.extend({
+
 	defaults: { 
 		'rows': 
 		[
@@ -70,7 +71,8 @@ var MTable = Backbone.Model.extend({
 
 })
 
-
+var MItems = Backbone.Model.extend({
+});
 
 var MCard = Backbone.Model.extend({
 	defaults: {
@@ -187,8 +189,24 @@ var singleView    = new SingleView   ({ model: mView   });
 var myCards = new MyCardsView ({ collection: mCards  });
 
 // Then, we grab additional model data
-//mPeople.fetch({ url: 'person.json' });
+//newItems = fetch({ url: 'person.json' });
 mCards.fetch({ url: 'card.json' });
+
+function fetchItems() {
+   $.get('items.json', function(data) {
+    theItems = new MItems(data);
+    console.log ('here is my response ' + JSON.stringify(data))
+    });
+}
+
+function appendItems() {
+set.MTable.items(theItems)
+}
+
+fetchItems();
+//appendItems();
+//replaceItems();
+
 
 // cFinally, we render views in our app
 
