@@ -43,7 +43,7 @@ var SingleThing = Backbone.Model.extend({
 	}
 });	
 
-var MTable = Backbone.Model.extend({
+var MTable = Backbone.NestedModel.extend({
 
 	defaults: { 
 		'rows': 
@@ -84,11 +84,6 @@ var MCard = Backbone.Model.extend({
 var MCards = Backbone.Collection.extend({
 	model: MCard
 });
-
-var TableView = Backbone.Marionette.ItemView.extend({
-  template: "tableheaders",
-});
-
 
 var NoItemsView = Backbone.Marionette.ItemView.extend({
   template: "empty"
@@ -194,19 +189,16 @@ mCards.fetch({ url: 'card.json' });
 
 function fetchItems() {
    $.get('items.json', function(data) {
-    theItems = new MItems(data);
-    console.log ('here is my response ' + JSON.stringify(data))
+
+$(data).each(function() {
+	console.log('vals '+ $(this)[0]);
+ mTable.add('items', $(this)[0])
+});
+ console.log('updated model ' + JSON.stringify(mTable))
     });
 }
 
-function appendItems() {
-set.MTable.items(theItems)
-}
-
 fetchItems();
-//appendItems();
-//replaceItems();
-
 
 // cFinally, we render views in our app
 
