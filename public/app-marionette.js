@@ -43,7 +43,7 @@ var SingleThing = Backbone.Model.extend({
 	}
 });	
 
-var MTable = Backbone.Model.extend({
+var MTable = Backbone.NestedModel.extend({
 
 	defaults: { 
 		'rows': 
@@ -85,9 +85,6 @@ var MCards = Backbone.Collection.extend({
 	model: MCard
 });
 
-var TableView = Backbone.Marionette.ItemView.extend({
-  template: "tableheaders",
-});
 
 
 var NoItemsView = Backbone.Marionette.ItemView.extend({
@@ -149,16 +146,7 @@ var SingleView = Marionette.ItemView.extend({
     }
 });
 
-var VInfo = Marionette.ItemView.extend({
-	// We declare the template to be used by the view
-	template: 'person',
-	tagName: 'tr',
-//	className: 'table-striped',
-	// We bind the model event to re-render
-	modelEvents: {
-        "change": "render"
-	}
-});
+
 
 var TableView = Marionette.ItemView.extend({
 
@@ -184,7 +172,7 @@ var mMain = new MMain();
 
 // Now, we combine our models with the views
 var tabsView    = new TabsView   ({ model: mTabs   });
-var tableView    = new TableView   ({ model: mTable });
+var tableView    = new TableView   ({ model: mTable   });
 var singleView    = new SingleView   ({ model: mView   });
 var myCards = new MyCardsView ({ collection: mCards  });
 
@@ -194,19 +182,16 @@ mCards.fetch({ url: 'card.json' });
 
 function fetchItems() {
    $.get('items.json', function(data) {
-    theItems = new MItems(data);
-    console.log ('here is my response ' + JSON.stringify(data))
+
+$(data).each(function() {
+	console.log('vals '+ $(this)[0]);
+ mTable.add('items', $(this)[0])
+});
+ console.log('updated model ' + JSON.stringify(mTable))
     });
 }
 
-function appendItems() {
-set.MTable.items(theItems)
-}
-
 fetchItems();
-//appendItems();
-//replaceItems();
-
 
 // cFinally, we render views in our app
 
