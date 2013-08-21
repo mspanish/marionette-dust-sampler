@@ -15,7 +15,7 @@ MainLayout = Backbone.Marionette.Layout.extend({
   }
 });
 
-var MMain = Backbone.Model.extend({
+var Main = Backbone.Model.extend({
 	defaults: {
 		'title': 'Main Dust.js Template'
     }
@@ -43,7 +43,7 @@ var SingleThing = Backbone.Model.extend({
 	}
 });	
 
-var MTable = Backbone.NestedModel.extend({
+var Table = Backbone.NestedModel.extend({
 
 	defaults: { 
 		'rows': 
@@ -71,18 +71,18 @@ var MTable = Backbone.NestedModel.extend({
 
 })
 
-var MItems = Backbone.Model.extend({
+var Items = Backbone.Model.extend({
 });
 
-var MCard = Backbone.Model.extend({
+var Card = Backbone.Model.extend({
 	defaults: {
 		'english'  : 'hola',
 		'spanish'   : 'hello'
 	}
 });
 
-var MCards = Backbone.Collection.extend({
-	model: MCard
+var Cards = Backbone.Collection.extend({
+	model: Card
 });
 
 var NoItemsView = Backbone.Marionette.ItemView.extend({
@@ -144,17 +144,6 @@ var SingleView = Marionette.ItemView.extend({
     }
 });
 
-var VInfo = Marionette.ItemView.extend({
-	// We declare the template to be used by the view
-	template: 'person',
-	tagName: 'tr',
-//	className: 'table-striped',
-	// We bind the model event to re-render
-	modelEvents: {
-        "change": "render"
-	}
-});
-
 var TableView = Marionette.ItemView.extend({
 
 	// we're using this type of view so that we can combine a 
@@ -171,30 +160,30 @@ var TableView = Marionette.ItemView.extend({
 
 
 // First: we instantiate our models...
-var mTabs = new Tabs();
-var mTable = new MTable();
-var mView = new SingleThing();
-var mCards = new MCards();
-var mMain = new MMain();
+var tabs = new Tabs();
+var table = new Table();
+var view = new SingleThing();
+var cards = new Cards();
+var main = new Main();
 
 // Now, we combine our models with the views
-var tabsView    = new TabsView   ({ model: mTabs   });
-var tableView    = new TableView   ({ model: mTable });
-var singleView    = new SingleView   ({ model: mView   });
-var myCards = new MyCardsView ({ collection: mCards  });
+var tabsView    = new TabsView   ({ model: tabs   });
+var tableView    = new TableView   ({ model: table });
+var singleView    = new SingleView   ({ model: view   });
+var myCards = new MyCardsView ({ collection: cards  });
 
 // Then, we grab additional model data
 //newItems = fetch({ url: 'person.json' });
-mCards.fetch({ url: 'card.json' });
+cards.fetch({ url: 'card.json' })
 
 function fetchItems() {
    $.get('items.json', function(data) {
 
 $(data).each(function() {
 	console.log('vals '+ $(this)[0]);
- mTable.add('items', $(this)[0])
+ table.add('items', $(this)[0])
 });
- console.log('updated model ' + JSON.stringify(mTable))
+ console.log('updated model ' + JSON.stringify(table))
     });
 }
 
@@ -202,7 +191,7 @@ fetchItems();
 
 // cFinally, we render views in our app
 
-myLayout = new MainLayout({ model: mMain   });
+myLayout = new MainLayout({ model: main   });
 
 MyApp.addRegions({
     mainRegion: '#main',
