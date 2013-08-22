@@ -2,7 +2,6 @@
 MyApp = new Backbone.Marionette.Application;
 
 MyApp.addInitializer(function(options){
-
     });
 
 MainLayout = Backbone.Marionette.Layout.extend({
@@ -44,6 +43,9 @@ var SingleThing = Backbone.Model.extend({
 });	
 
 var Table = Backbone.NestedModel.extend({
+initialize: function () {
+
+},
 
 	defaults: { 
 		'rows': 
@@ -52,27 +54,11 @@ var Table = Backbone.NestedModel.extend({
 			{'name' : 'Email'},
 			{'name' : 'Description'}
 		],
-		'items':
-		[
-		{
-			"firstname": "John",
-			"lastname": "Bar",
-			"email": "john.bar@example.com",
-			"description": "I'm awesome, just hire me."
-		},
-		{
-			"firstname": "Dave",
-			"lastname": "Smith",
-			"email": "dave.bar@example.com",
-			"description": "I'm brilliant, just hire me."
-		}
-		]
+		'items': []
 	}
 
 })
 
-var Items = Backbone.Model.extend({
-});
 
 var Card = Backbone.Model.extend({
 	defaults: {
@@ -162,9 +148,11 @@ var TableView = Marionette.ItemView.extend({
 // First: we instantiate our models...
 var tabs = new Tabs();
 var table = new Table();
+
 var view = new SingleThing();
 var cards = new Cards();
 var main = new Main();
+
 
 // Now, we combine our models with the views
 var tabsView    = new TabsView   ({ model: tabs   });
@@ -177,13 +165,26 @@ var myCards = new MyCardsView ({ collection: cards  });
 cards.fetch({ url: 'card.json' })
 
 function fetchItems() {
+	console.log('our old table model is ' + JSON.stringify(table))
    $.get('items.json', function(data) {
+var fieldsArray =  [];
+var fieldsObject = {
+	'fields' : fieldsArray
+};
 
 $(data).each(function() {
-	console.log('vals '+ $(this)[0]);
- table.add('items', $(this)[0])
+var personArray;
+fieldsArray = [];
+// var field1 = {'field': $(this)[0].firstname + ' ' + $this)[0].lastname}
+// var field2 = {'field': $(this)[0].email}
+// var field3 = {'field': $(this)[0].description}
+fieldsArray.push({'field': 'yo'})
+fieldsArray.push({'field': 'yo2'})		
+fieldsArray.push({'field': 'yo3'})
+
+table.add('items', fieldsArray);
 });
- console.log('updated model ' + JSON.stringify(table))
+ console.log('updated table model ' + JSON.stringify(table))
     });
 }
 

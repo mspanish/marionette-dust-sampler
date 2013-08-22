@@ -1,0 +1,8 @@
+{#items}
+<tr>
+<td>
+This should be my field {$idx}
+	<h1>{field}</h1>
+</td>
+{/items}
+</tr>	
