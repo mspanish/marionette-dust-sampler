@@ -7,7 +7,7 @@
 </thead>
 
 <tbody >
-{>person /}	
+{>tablefields/}	
 </tbody>
 
 </table>

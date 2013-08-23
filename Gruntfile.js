@@ -31,13 +31,13 @@ module.exports = function(grunt) {
     },
   
     watch: {
-      files: ['public/templates/**/*.js', 'public/css/**/*.css'],
-      tasks: ['concat', 'cssmin']
+      files: ['public/templates/**/*.js'],
+      tasks: ['concat']
     }
 
   });
 
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
+ // grunt.loadNpmTasks('grunt-contrib-cssmin');
 
 //  grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -45,6 +45,6 @@ module.exports = function(grunt) {
 
  // grunt.registerTask('test', ['jshint', 'qunit']);
 
-  grunt.registerTask('default', ['concat', 'cssmin']);
+  grunt.registerTask('default', ['concat']);
 
 };
