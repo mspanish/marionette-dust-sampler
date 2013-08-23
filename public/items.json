@@ -3,14 +3,16 @@
 		  		"fields": 
 		  		[
 
-					{"field" : "dan abrams"},
+					{"field" : "dan"},
+					{"field" : "abrams"},
 					{"field" : "dan@dan.com"},
 					{"field" : "da guy"}
 				]
 			},
 			{ 	"fields":	
 				[
-					{"field" : "joe smith"},
+					{"field" : "joe"},
+					{"field" : "smith"},
 					{"field" : "joe@joe.com"},
 					{"field" : "da man"}
 				]
