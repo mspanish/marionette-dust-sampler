@@ -48,15 +48,24 @@ initialize: function () {
 },
 
 	defaults: { 
-		'rows': 
+		"rows": 
 		[
-			{'name' : 'Name'},
-			{'name' : 'Email'},
-			{'name' : 'Description'}
+			{"name" : "Name"},
+			{"name" : "Email"},
+			{"name" : "Description"}
 		],
-		'items': []
-	}
+		"items": 
+		[ 
+			{
+		  		"fields": [
 
+					{"field" : "fullName"},
+					{"field" : "email"},
+					{"field" : "description"}
+				]
+			}
+		]
+	}
 })
 
 
@@ -160,6 +169,9 @@ var tableView    = new TableView   ({ model: table });
 var singleView    = new SingleView   ({ model: view   });
 var myCards = new MyCardsView ({ collection: cards  });
 
+console.log('updated table model ' + JSON.stringify(table))
+
+
 // Then, we grab additional model data
 //newItems = fetch({ url: 'person.json' });
 cards.fetch({ url: 'card.json' })
@@ -174,6 +186,7 @@ var fieldsObject = {
 
 $(data).each(function() {
 var personArray;
+
 fieldsArray = [];
 // var field1 = {'field': $(this)[0].firstname + ' ' + $this)[0].lastname}
 // var field2 = {'field': $(this)[0].email}
@@ -182,13 +195,13 @@ fieldsArray.push({'field': 'yo'})
 fieldsArray.push({'field': 'yo2'})		
 fieldsArray.push({'field': 'yo3'})
 
-table.add('items', fieldsArray);
+table.add('items.fields',[{'field':'yo'}]);
 });
  console.log('updated table model ' + JSON.stringify(table))
     });
 }
 
-fetchItems();
+//fetchItems();
 
 // cFinally, we render views in our app
 
