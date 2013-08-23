@@ -57,15 +57,23 @@ initialize: function () {
 		"items": 
 		[ 
 			{
-		  		"fields": [
+		  		"fields": 
+		  		[
 
 					{"field" : "fullName"},
 					{"field" : "email"},
 					{"field" : "description"}
 				]
+			},
+			{ 	"fields":	
+				[
+					{"field" : "joe"},
+					{"field" : "joe@joe.com"},
+					{"field" : "da man"}
+				]
 			}
-		]
-	}
+	]
+}
 })
 
 

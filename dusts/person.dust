@@ -1,15 +1,11 @@
-{#items}
-{#fields}
 <tr>
+{#items}
+
+{#fields}
 <td>
-	<h1>{field}</h1>
+	<h2>{field}</h2>
 </td>
-<td>	
-	<p>my</p>
-</td>	
-<td>
-	<p>love</p>
-</td>
-</tr>
 {/fields}
+
+</tr>
 {/items}

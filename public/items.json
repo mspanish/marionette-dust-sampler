@@ -1,13 +1,18 @@
-[{
-	"firstname": "Chuck",
-	"lastname": "Smith",
-	"email": "chuck.smith@example.com",
-	"description": "I love dogs."
-},
-{
-	"firstname": "Pete",
-	"lastname": "Rogers",
-	"email": "pete@example.com",
-	"description": "I love cats"
-}
+[ 
+			{
+		  		"fields": 
+		  		[
+
+					{"field" : "dan abrams"},
+					{"field" : "dan@dan.com"},
+					{"field" : "da guy"}
+				]
+			},
+			{ 	"fields":	
+				[
+					{"field" : "joe smith"},
+					{"field" : "joe@joe.com"},
+					{"field" : "da man"}
+				]
+			}
 ]
