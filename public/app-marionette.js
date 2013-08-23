@@ -2,7 +2,6 @@
 MyApp = new Backbone.Marionette.Application;
 
 MyApp.addInitializer(function(options){
-
     });
 
 MainLayout = Backbone.Marionette.Layout.extend({
@@ -44,35 +43,39 @@ var SingleThing = Backbone.Model.extend({
 });	
 
 var Table = Backbone.NestedModel.extend({
+initialize: function () {
+
+},
 
 	defaults: { 
-		'rows': 
+		"rows": 
 		[
-			{'name' : 'Name'},
-			{'name' : 'Email'},
-			{'name' : 'Description'}
+			{"name" : "Name"},
+			{"name" : "Email"},
+			{"name" : "Description"}
 		],
-		'items':
-		[
-		{
-			"firstname": "John",
-			"lastname": "Bar",
-			"email": "john.bar@example.com",
-			"description": "I'm awesome, just hire me."
-		},
-		{
-			"firstname": "Dave",
-			"lastname": "Smith",
-			"email": "dave.bar@example.com",
-			"description": "I'm brilliant, just hire me."
-		}
-		]
-	}
+		"items": 
+		[ 
+			{
+		  		"fields": 
+		  		[
 
+					{"field" : "fullName"},
+					{"field" : "email"},
+					{"field" : "description"}
+				]
+			},
+			{ 	"fields":	
+				[
+					{"field" : "joe"},
+					{"field" : "joe@joe.com"},
+					{"field" : "da man"}
+				]
+			}
+	]
+}
 })
 
-var Items = Backbone.Model.extend({
-});
 
 var Card = Backbone.Model.extend({
 	defaults: {
@@ -162,9 +165,11 @@ var TableView = Marionette.ItemView.extend({
 // First: we instantiate our models...
 var tabs = new Tabs();
 var table = new Table();
+
 var view = new SingleThing();
 var cards = new Cards();
 var main = new Main();
+
 
 // Now, we combine our models with the views
 var tabsView    = new TabsView   ({ model: tabs   });
@@ -172,18 +177,43 @@ var tableView    = new TableView   ({ model: table });
 var singleView    = new SingleView   ({ model: view   });
 var myCards = new MyCardsView ({ collection: cards  });
 
+console.log('updated table model ' + JSON.stringify(table))
+
+
 // Then, we grab additional model data
 //newItems = fetch({ url: 'person.json' });
 cards.fetch({ url: 'card.json' })
 
 function fetchItems() {
+	console.log('our old table model is ' + JSON.stringify(table))
    $.get('items.json', function(data) {
+// now, if we want computed values, we need to know which rows we want computed, and instead of running a simple 'each' on them, we can compute the rows we want, create a new object with all "field" entries, and submit that instead. The rows and fields in the Table model must still be the SAME number and match up!!
 
+/* this is without any computed values 
 $(data).each(function() {
-	console.log('vals '+ $(this)[0]);
- table.add('items', $(this)[0])
+console.log('our array data is ' + $(this)[0] )
+table.add('items',$(this)[0]);
 });
- console.log('updated model ' + JSON.stringify(table))
+*/
+
+/* this is WITH computed values */
+$(data).each(function() {
+console.log('our array data is ' + $(this)[0] )
+var fullName = $(this)[0].fields[0].field + ' '+ $(this)[0].fields[1].field;
+var email = $(this)[0].fields[2].field ;
+var description = $(this)[0].fields[3].field ;
+
+var computedObject = {fields:[
+{"field": fullName},
+{"field": email},
+{"field": description}
+	]
+}
+console.log('computedObject is ' + JSON.stringify(computedObject))
+table.add('items', computedObject);
+});
+
+ console.log('updated table model ' + JSON.stringify(table))
     });
 }
 

@@ -1,0 +1,11 @@
+<tr>
+{#items}
+
+{#fields}
+<td>
+	<h2>{field}</h2>
+</td>
+{/fields}
+
+</tr>
+{/items} 
