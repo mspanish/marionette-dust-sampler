@@ -1,11 +1,13 @@
-var Main = Backbone.Model.extend({
+var App = App || new Backbone.Marionette.Application();
+
+App.Main = Backbone.Model.extend({
 	defaults: {
 		'title': 'Main Dust.js Template'
     }
 
 });	
 
-var Tabs = Backbone.Model.extend({
+App.Tabs = Backbone.Model.extend({
 	defaults: {
 		'sections':
       [
@@ -19,18 +21,14 @@ var Tabs = Backbone.Model.extend({
 
 });	
 
-var SingleThing = Backbone.Model.extend({
+App.SingleThing = Backbone.Model.extend({
 	defaults: {
 		'title'  : 'Our Awesome Dust.js itemView Template',
 		'content': 'This shows a simple Marionette.ItemView, rendered by a Dust.js template' 
 	}
 });	
 
-var Table = Backbone.NestedModel.extend({
-initialize: function () {
-
-},
-
+App.Table = Backbone.NestedModel.extend({
 	defaults: { 
 		"rows": 
 		[
@@ -60,14 +58,13 @@ initialize: function () {
 }
 })
 
-
-var Card = Backbone.Model.extend({
+App.Card = Backbone.Model.extend({
 	defaults: {
 		'english'  : 'hola',
 		'spanish'   : 'hello'
 	}
 });
 
-var Cards = Backbone.Collection.extend({
-	model: Card
+App.Cards = Backbone.Collection.extend({
+	model: App.Card
 });
