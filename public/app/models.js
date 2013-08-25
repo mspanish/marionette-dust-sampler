@@ -30,6 +30,26 @@ App.SingleThing = Backbone.Model.extend({
 	}
 });	
 
+App.SuperTable = Backbone.Model.extend({
+        initialize: function (options) {
+            Supermodel.Model.prototype.initialize.call(this, options);
+        },
+
+        fields: {
+           "firstName,lastName": { text: "First and Last Name", isDefault: true},
+            firstName: { text: "Last Name", isDefault: true, isFilterable: true },
+            lastName: { text: "First Name", isDefault: true, isFilterable: true },
+            email: { text: "Email", isDefault: true, isFilterable: true },
+            description: { text: "Description", isDefault: true, isFilterable: true }
+         },
+      	parse: function (response) {
+        	response = App.Models.SuperTable.prototype.parse.call(this, response);
+        	response.fullName = response.firstName + ' ' + response.lastName;
+        	return response;
+    }
+
+});
+
 App.Table = Backbone.NestedModel.extend({
 	defaults: { 
 		"rows": 
