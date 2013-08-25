@@ -5,10 +5,23 @@ App.module("Dashboard", function(){
  this.ControllerClass = Marionette.Controller.extend({
    initialize: function(options){
 
+/* Here is the spinner for our App,which we can use whereever, but here
+we are attaching it to ALL ajax loads */
+  
+		var spinner =  $('#spinner');
+		spinner.hide() 
+
+    	$(document).ajaxStart(function() {
+ 			spinner.show();
+    	})
+    	$(document).ajaxStop(function() {
+    		spinner.hide();
+    	});
   },
 
  loadData: function(){
-//    this.trigger("stuff:done", this.stuff);
+//    this.trigger("stuff:done", this.stuff);	
+
     cards.fetch({ url: 'card.json' });
     fetchItems();
   }
@@ -17,6 +30,7 @@ App.module("Dashboard", function(){
 function fetchItems() {
 	console.log('our old table model is ' + JSON.stringify(table))
    $.get('items.json', function(data) {
+
 // now, if we want computed values, we need to know which rows we want computed, and instead of running a simple 'each' on them, we can compute the rows we want, create a new object with all "field" entries, and submit that instead. The rows and fields in the Table model must still be the SAME number and match up!!
 
 /* this is without any computed values 

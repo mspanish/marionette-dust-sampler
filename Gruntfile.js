@@ -9,26 +9,21 @@ module.exports = function(grunt) {
 
       js: {
         src: ['public/templates/*.js'],
-        dest: 'public/templates.js'
-      },
-      css: {
-        src: ['public/css/*.css'],
-        dest: 'public/styles.css'
-      },
+        dest: 'public/app/templates.js'
+      }
+      // css: {
+      //   src: ['public/css/*.css'],
+      //   dest: 'public/styles.css'
+      // },
 
 },
-      cssmin: {
-        css:{
-          src: 'public/styles.css',
-          dest: 'public/styles.min.css'
-        }
 /*
       dist: {
         src: ['public/templates/*.js'],
         dest: 'public/templates.js'
       }
 */
-    },
+ 
   
     watch: {
       files: ['public/templates/**/*.js'],

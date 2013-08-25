@@ -7,6 +7,8 @@ App.Main = Backbone.Model.extend({
 
 });	
 
+
+
 App.Tabs = Backbone.Model.extend({
 	defaults: {
 		'sections':
@@ -23,7 +25,7 @@ App.Tabs = Backbone.Model.extend({
 
 App.SingleThing = Backbone.Model.extend({
 	defaults: {
-		'title'  : 'Our Awesome Dust.js itemView Template',
+		'title'  : 'Our Awesome Dust itemView Template',
 		'content': 'This shows a simple Marionette.ItemView, rendered by a Dust.js template' 
 	}
 });	

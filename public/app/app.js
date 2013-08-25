@@ -1,6 +1,7 @@
 var App = App || new Backbone.Marionette.Application();
 
 App.addInitializer(function(options){
+
 App.Dashboard.Controller.loadData();
 Backbone.history.start();
 });

@@ -22,13 +22,13 @@
 {@if cond="{$idx} < {numberItems}"}
 
     <li class="tab-content tab-content-{$idx} typography">
-      <div id="{name}"></div>
+         <div id="{name}"></div>
     </li>
 
  {:else}
 
     <li class="tab-content tab-content-last typography">
-          <div id="{name}"></div>
+        <div id="{name}"></div>
     </li>
 </ul>
 

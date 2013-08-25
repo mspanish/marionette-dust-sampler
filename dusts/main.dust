@@ -1,3 +1,5 @@
 <h1>{title}</h1>
+
+ {>spinner /}   
 <div id="nav"></div>
 <div id="tabs"></div>

@@ -68,5 +68,7 @@ App.TableView = Marionette.ItemView.extend({
 	},
 	  onRender: function () {
       console.log('table view rendered');
+    //  $('#table_main').css('display', 'none');
+    //  $('#table_main').fadeIn(1000);
     }
 });
